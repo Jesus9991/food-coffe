@@ -1,7 +1,8 @@
-import 'package:app_uno/models/models.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import "package:flutter_feather_icons/flutter_feather_icons.dart";
 import 'package:flutter/material.dart';
+import 'package:card_swiper/card_swiper.dart';
+
+
 
 class HomeNewScreen extends StatefulWidget {
    
@@ -56,7 +57,9 @@ class _HomeNewScreenState extends State<HomeNewScreen> {
           Divider(height: 20,color: Colors.transparent,),
           _ofertas(), /*llamado a ofertas */
             Divider(height: 20,color: Colors.transparent,),
-          _categorias() /*llamado a categorias */
+          _categorias(), /*llamado a categorias */
+           Divider(height: 20,color: Colors.transparent,),  
+          _cartaDeComida(),
       ],
     ),
   );
@@ -215,7 +218,7 @@ class _categorias extends StatelessWidget {
               ),
             ),
             Card( //* espagetis
-            color: Color(0xfffa8dcd1).withOpacity(0.3),
+            color: const Color(0xfffa8dcd1).withOpacity(0.3),
              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               elevation: 0,
               child: SizedBox(
@@ -237,6 +240,40 @@ class _categorias extends StatelessWidget {
            
         ),
       ),
+    );
+  }
+}
+
+//* carta de comida 
+class _cartaDeComida extends StatelessWidget {
+  const _cartaDeComida({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+     
+      width: double.infinity,
+      height: size.height/3,
+      child:Swiper(
+        curve: Curves.decelerate,
+       itemCount: 10,
+       layout: SwiperLayout.STACK,
+       itemWidth: size.width*.5,
+       itemHeight: size.height*.7,
+       itemBuilder: ( _ ,index){
+      return 
+      ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: const FadeInImage(
+           placeholder: AssetImage("assets/girs.png"), 
+        image: AssetImage("assets/maple-bourbon-burger.jpg"),fit: BoxFit.cover,
+         ),
+      );
+        },
+              
+        ),
+      
     );
   }
 }
